@@ -1,0 +1,18 @@
+name: Deploy to Production
+
+# Triggered by branch activity on 'main'
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Trigger Render Production Deployment
+    runs-on: ubuntu-latest
+    # Binds to the Production environment secrets
+    environment: production 
+    
+    steps:
+      - name: Trigger Render Deploy Hook
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}

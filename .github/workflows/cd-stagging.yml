@@ -1,0 +1,18 @@
+name: Deploy to Staging
+
+# Triggered by branch activity on 'release'
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  deploy:
+    name: Trigger Render Staging Deployment
+    runs-on: ubuntu-latest
+    # Binds to the Staging environment secrets
+    environment: staging 
+    
+    steps:
+      - name: Trigger Render Deploy Hook
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}

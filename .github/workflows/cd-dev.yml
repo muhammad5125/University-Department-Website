@@ -1,0 +1,19 @@
+name: Deploy to Development
+
+# Triggered by branch activity on 'develop'
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    name: Trigger Render Dev Deployment
+    runs-on: ubuntu-latest
+    # Binds this job to the GitHub Environment to access its specific secrets
+    environment: development 
+    
+    steps:
+      - name: Trigger Render Deploy Hook
+        # Uses curl to send a request to the Render Webhook
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
