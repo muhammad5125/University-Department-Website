@@ -25,13 +25,16 @@ jobs:
         run: npm install -g htmlhint stylelint stylelint-config-standard
 
       - name: Configure Stylelint
-        run: echo '{"extends": "stylelint-config-standard"}' > .stylelintrc.json
+        run: |
+          echo '{"extends": "stylelint-config-standard"}' > .stylelintrc.json
 
       - name: Run HTML Hint
-        run: htmlhint src/**/*.html
+        run: |
+          htmlhint src/**/*.html
 
       - name: Run Stylelint
-        run: stylelint src/**/*.css
+        run: |
+          stylelint src/**/*.css
 
   build-test:
     name: Test Docker Build
